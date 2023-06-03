@@ -27,22 +27,6 @@ export default class App extends Component {
     audio.pause();
     audio.currentTime = 0;
   };
-  btnRestart = () => {
-    if (this.state.audio) {
-      this.playStop();
-    }
-    let { second, minut, soat } = this.state
-    second = 0
-    minut = 0
-    soat = 0
-    this.setState({
-      second,
-      minut,
-      soat
-    })
-  }
-
-
   Btn_soat_pilus = () => {
     let soat = this.state.soat
     soat++
@@ -155,7 +139,7 @@ export default class App extends Component {
       let { second, minut, soat } = this.state
       if (second === 0 && minut === 0 && soat === 0) {
         alert('taymer 0 dan boshlab bo`lmayadi !!!')
-      }else{
+      } else {
         let intervalId = setInterval(this.btn_Taymer, 1000);
         this.setState({ intervalId });
       }
@@ -169,6 +153,22 @@ export default class App extends Component {
       this.playStop();
     }
   };
+  btnRestart = () => {
+
+    let { second, minut, soat } = this.state
+    second = 0
+    minut = 0
+    soat = 0
+    if (second === 0 || minut === 0 || soat === 0) {
+      this.btnStop()
+      this.playStop()
+      this.setState({
+        second,
+        minut,
+        soat
+      })
+    }
+  }
 
   render() {
     return (
